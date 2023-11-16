@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<marquee><h1 style="color: palevioletred;">Amazon Products</h1></marquee>
+<div class="row">
+   <div class="col-md-6">
+    {% for i in p %}
+    <a href="{% url 'myapp:detail' i.id i.slug %}"><b>{{i.title}}</b></a><br>
+    <img src="{{i.img.url}}" width="300" height="300" alt=""><br>
+    ⟨₹⟩{{i.price}}
+    <br><br>
+    <style>
+      body{
+         background-color:gainsboro;
+      }
+    </style>
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}
