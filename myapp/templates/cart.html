@@ -4,9 +4,9 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">product</th>
-        <th scope="col">price</th>
-        <th scope="col">quantity</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
         <th scope="col">Total Cost</th>
 
       </tr>
@@ -15,10 +15,10 @@
     {% for i in c %}
       <tr>
         <th scope="row">{{forloop.counter}}</th>
-        <td>{{i.product}}</td>
-        <td>{{i.price}}</td>
-        <td>{{i.quantity}}</td>
-        <td>{{i.total}}</td>
+        <td>{{i.Product}}</td>
+        <td>{{i.Price}}</td>
+        <td>{{i.Quantity}}</td>
+        <td>{{i.Total}}</td>
         <td>
         <form action="" method="post">
             {% csrf_token %}
@@ -32,7 +32,12 @@
   </table><br>
   Total: ₹{{t}}<br>
   <br><br>
-  <a class="btn btn-secondary" href="{% url 'myapp:order' %}">Order</a>
+  <a class="btn btn-info" href="{% url 'myapp:order' %}">Order</a>
   &nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary" href="{% url 'myapp:index' %}">Back/Continue</a>
+  <a class="btn btn-info" href="{% url 'myapp:category' %}">Back/Continue</a>
+  <style>
+    body{
+      font-size: 16px;
+    }
+  </style>
   {% endblock %}

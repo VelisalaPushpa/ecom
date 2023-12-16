@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<b>Cart</b><br>
+<style>
+    body{
+        font-size: 20px;
+    }
+</style>
+<b><h3>Cart</h3></b>
 {% for i in items %}
 {{i.product}}<br>
 {% endfor %}

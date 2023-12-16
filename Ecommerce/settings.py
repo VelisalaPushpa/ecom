@@ -9,18 +9,19 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = Path(file).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cx=9age#(sg!+uf(6^(95z3pc5u#=$*t!5i()f^)z_qne4dv#h'
+SECRET_KEY = 'django-insecure-d45g=qj9!n#^^vdcu3jw)3^zf8_pi$e#-e!+xfjg@j(9z$t(_='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
-    'paypal.standard.ipn',
-    'registration',
-
+     'myapp',
+     'registration',
+     'paypal.standard.ipn',
+     
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,8 @@ WSGI_APPLICATION = 'Ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))     
     }
 }
 
@@ -120,33 +122,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    "/var/www/static/",
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     "/var/www/static/",
+# ]
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, 'static'),
+)
 # Base url to serve media files
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
 
 # Path where media is stored'
-MEDIA_ROOT = BASE_DIR / 'media'
-
+#MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field 
-
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYPAL_TEST = True
-
 LOGIN_REDIRECT_URL = '/'
-
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
-
+ACCOUNT_ACTIVATION_DAYS=7
+REGISTRATION_AUTO_LOGIN=True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'velisilap@gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='velisilap@gmail.com'
 EMAIL_HOST_PASSWORD = 'ffqfkfgbaqopzjiw'
-EMAIL_USE_TLS = True
-REGISTRATION_EMAIL_SUBJECT_PREFIX = '[Ecommerce]'
+EMAIL_USE_TLS=True
+REGISTRATION_EMAIL_SUBJECT_PREFIX='[Ecommerce]'
 REGISTRATION_OPEN = True
 ACCOUNT_AUTHENTICATED_REGISTRATION_REDIRECTS=False
